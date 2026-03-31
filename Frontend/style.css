@@ -1,0 +1,22 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+table {
+  margin-top: 15px;
+  width: 100%;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+select {
+  padding: 5px;
+}
