@@ -1,37 +1,42 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Job Application Tracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="container">
 
-  <h1>Job Application Tracker</h1>
+    <h1>Job Application Tracker</h1>
 
-  <section>
-    <h2>Add Job</h2>
-    <input type="text" id="company" placeholder="Company">
-    <input type="text" id="role" placeholder="Role">
-    <button onclick="createJob()">Add Job</button>
-  </section>
+    <div class="card">
+      <h2>Add Job</h2>
+      <input type="text" id="company" placeholder="Company">
+      <input type="text" id="role" placeholder="Role">
+      <button onclick="createJob()">Add Job</button>
+    </div>
 
-  <section>
-    <h2>All Jobs</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Company</th>
-          <th>Role</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="jobsTable"></tbody>
-    </table>
-  </section>
+    <div class="card">
+      <h2>All Jobs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="jobsTable"></tbody>
+      </table>
+    </div>
 
-  <script src="/Frontend/script.js"></script>
+  </div>  
+
+  <script src="script.js"></script>
 </body>
 </html>

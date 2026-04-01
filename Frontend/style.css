@@ -1,22 +1,117 @@
-body {
-  font-family: Arial;
+body{
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+.container {
+  width: 80%;
+  margin: 40px auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
   padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0,2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
   margin-right: 10px;
-}
-
-table {
-  margin-top: 15px;
-  width: 100%;
+  outline: none;
 }
 
 button {
-  padding: 5px 10px;
-  cursor: pointer;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  color: white;
+  transition: all 0.3s ease;
 }
 
-select {
-  padding: 5px;
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background: rgba(255,255,255,0.2);
+}
+
+tr {
+  transition: 0.3s;
+}
+
+tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.status {
+  padding:5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: infinite-block;
+}
+
+/*COLOUR*/
+.status.applied {
+  background: rgba(255,255,255,0.2);
+  color: #00ffcc;
+}
+.status.interview {
+  background: rgba(255,255,255,0.2);
+  color: #ffd700;
+}
+.status.offer {
+  background: rgba(255,255,255,0.2);
+  color: #00ff00;
+}
+.status.rejected {
+  background: rgba(255,255,255,0.2);
+  color: #ff4d4d;
+}
+
+.status {
+  transition: all 0.3s ease;
+}
+
+.status:hover {
+  transform: scale(1.1);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity:1; transform: translateY(0); }
 }

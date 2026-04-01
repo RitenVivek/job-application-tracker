@@ -14,11 +14,15 @@ function fetchJobs() {
 
             data.forEach(job => {
                 table.innerHTML += `
-                    <tr>
+                    <tr class="fade-in">
                         <td>${job.id}</td>
                         <td>${job.company}</td>
                         <td>${job.role}</td>
                         <td>
+                          <span class="status ${job.status}">
+                            ${job.status}
+                          </span>
+                          <br/>  
                           <select onchange="updateStatus(${job.id}, this.value)">
                             <option value="applied" ${job.status === "applied" ? "selected" : ""}>Applied</option>
                             <option value="interview" ${job.status === "interview" ? "selected" : ""}>Interview</option>
@@ -61,7 +65,7 @@ function createJob() {
 window.createJob = createJob;
 
 function deleteJob(id) {
-    fetch(`${API_URL}/${ID}`, {
+    fetch(`${API_URL}/${id}`, {
         method: "DELETE"
     })
     .then(() => fetchJobs());
