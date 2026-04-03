@@ -21,6 +21,24 @@
 
     <div class="card">
       <h2>All Jobs</h2>
+      <div style="display:flex; gap:10px; margin-bottom:15px;">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search company or role..."
+          oninput="filterJobs()"
+        >
+
+        <select id="statusFilter" onchange="filterJobs()" id="statusFilter">
+          <option value="">ALL</option>
+          <option value="applied">Applied</option>
+          <option value="interview">Interview</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        
+      </div>    
+
       <table>
         <thead>
           <tr>
@@ -38,5 +56,6 @@
   </div>  
 
   <script src="script.js"></script>
+  <div id="toast" class="toast"></div>
 </body>
 </html>
