@@ -1,6 +1,6 @@
 console.log("Script loaded successfully");
 window.createJob = createJob;
-const API_URL = "http://127.0.0.1:5000/jobs";
+const API_URL = "http://your-render-url/jobs";
 
 let sortDirection = 1;
 // Load jobs on page load
