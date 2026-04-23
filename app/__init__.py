@@ -14,6 +14,10 @@ def create_app():
     from app.routes.jobs import jobs_bp
     app.register_blueprint(jobs_bp)
 
+    @app.route("/")
+    def home():
+        return "Job Tracker API is running"
+
     @app.route("/health")
     def health():
         return {"status": "OK"}
