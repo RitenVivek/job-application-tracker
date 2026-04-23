@@ -9,10 +9,13 @@ def create_app():
     app.config.from_object("config.Config")
 
     CORS(app)
-
     db.init_app(app)
+    
     from app.routes.jobs import jobs_bp
     app.register_blueprint(jobs_bp)
+
+    with app.app_context():
+        db.create_all()
 
     @app.route("/")
     def home():
