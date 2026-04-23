@@ -2,6 +2,7 @@ console.log("Script loaded successfully");
 window.createJob = createJob;
 const API_URL = "http://127.0.0.1:5000/jobs";
 
+let sortDirection = 1;
 // Load jobs on page load
 window.onload = fetchJobs;
 
@@ -9,35 +10,13 @@ function fetchJobs() {
     fetch(API_URL)
         .then(res => res.json())
         .then(data => {
-            const table = document.getElementById("jobsTable");
-            table.innerHTML = "";
-
-            data.forEach(job => {
-                table.innerHTML += `
-                    <tr class="fade-in">
-                        <td>${job.id}</td>
-                        <td>${job.company}</td>
-                        <td>${job.role}</td>
-                        <td>
-                          <span class="status ${job.status}">
-                            ${job.status}
-                          </span>
-                          <br/>  
-                          <select onchange="updateStatus(${job.id}, this.value)">
-                            <option value="applied" ${job.status === "applied" ? "selected" : ""}>Applied</option>
-                            <option value="interview" ${job.status === "interview" ? "selected" : ""}>Interview</option>
-                            <option value="offer" ${job.status === "offer" ? "selected" : ""}>Offer</option>
-                            <option value="rejected" ${job.status ==="rejected" ? "selected" : ""}>Rejected</option>
-                          </select>
-                        </td>
-                        <td>
-                          <button onclick="deleteJob(${job.id})">Delete</button>
-                        </td>    
-                    </tr>
-                `;
-            });
-            filterJobs()
-        });
+            localStorage.setItem("jobs", JSON.stringify(data));
+            renderJobs(data);
+        })
+        .catch(() => {
+          const data = JSON.parse(ocalStorage.getItem("jobs")) || [];
+          renderJobs(data);
+        });    
 }
 
 function createJob() {
@@ -50,20 +29,14 @@ function createJob() {
     }
 
     fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ company, role })
+      method: "POST",
+      header: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ company, role })
     })
-    .then(res => res.json())
-    .then(() => {
-        document.getElementById("company").value = "";
-        document.getElementById("role").value = "";
-        fetchJobs(); 
-        showToast("Job added ");
-    });
 }
+
 window.createJob = createJob;
 
 function deleteJob(id) {
@@ -115,11 +88,11 @@ function filterJobs() {
   });
 }
 
-function renderJobs(jobs) {
+function renderJobs(data) {
   const table = document.getElementById("jobsTable");
   table.innerHTML = "";
 
-  jobs.forEach(job => {
+  data.forEach(job => {
     table.innerHTML += `
       <tr class="fade-in">
         <td>${job.id}</td>
@@ -155,4 +128,48 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove("show");
   }, 2000);
+}
+
+function sortJobs(field) {
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(data => {
+
+            data.sort((a, b) => {
+                if (a[field] < b[field]) return -1 * sortDirection;
+                if (a[field] > b[field]) return 1 * sortDirection;
+                return 0;
+            });
+
+            sortDirection *= -1; // toggle ASC/DESC
+
+            const table = document.getElementById("jobsTable");
+            table.innerHTML = "";
+
+            data.forEach(job => {
+                table.innerHTML += `
+                <tr class="fade-in">
+                    <td>${job.id}</td>
+                    <td>${job.company}</td>
+                    <td>${job.role}</td>
+                    <td>
+                        <span class="status ${job.status}">${job.status}</span>
+                        <br/>
+                        <select onchange="updateStatus(${job.id}, this.value)">
+                            <option value="applied" ${job.status==="applied"?"selected":""}>Applied</option>
+                            <option value="interview" ${job.status==="interview"?"selected":""}>Interview</option>
+                            <option value="offer" ${job.status==="offer"?"selected":""}>Offer</option>
+                            <option value="rejected" ${job.status==="rejected"?"selected":""}>Rejected</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button onclick="deleteJob(${job.id})">Delete</button>
+                    </td>
+                </tr>
+                `;
+            });
+
+            filterJobs();
+            updateStats(data);
+        });
 }

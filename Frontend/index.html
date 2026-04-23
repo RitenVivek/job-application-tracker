@@ -20,6 +20,17 @@
     </div>
 
     <div class="card">
+      <h2>Dashboard</h2>
+      <div id="stats" style="display:flex; gap:15px; flex-wrap:wrap;">
+        <div class="stat-box">Total: <span id="totalCount">0</span></div>
+        <div class="stat-box">Applied: <span id="appliedCount">0</span></div>
+        <div class="stat-box">Interview: <span id="interviewCount">0</span></div>
+        <div class="stat-box">Offer: <span id="offerCount">0</span></div>
+        <div class="stat-box">Rejected: <span id="rejectedCount">0</span></div>
+      </div>
+    </div>
+
+    <div class="card">
       <h2>All Jobs</h2>
       <div style="display:flex; gap:10px; margin-bottom:15px;">
         <input
@@ -43,9 +54,9 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Company</th>
-            <th>Role</th>
-            <th>Status</th>
+            <th onclick="sortJobs('company')">Company </th>
+            <th onclick="sortJobs('role')">Role </th>
+            <th onclick="sortJobs('status')">Status </th>
             <th>Actions</th>
           </tr>
         </thead>
