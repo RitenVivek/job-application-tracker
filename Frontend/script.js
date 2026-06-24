@@ -1,6 +1,6 @@
 console.log("Script loaded successfully");
 window.createJob = createJob;
-const API_URL = "http://your-render-url/jobs";
+const API_URL = "https://job-tracker-api-1-ksbg.onrender.com/jobs";
 
 let sortDirection = 1;
 // Load jobs on page load
@@ -14,7 +14,7 @@ function fetchJobs() {
             renderJobs(data);
         })
         .catch(() => {
-          const data = JSON.parse(ocalStorage.getItem("jobs")) || [];
+          const data = JSON.parse(localStorage.getItem("jobs")) || [];
           renderJobs(data);
         });    
 }
@@ -30,7 +30,7 @@ function createJob() {
 
     fetch(API_URL, {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ company, role })
@@ -141,7 +141,7 @@ function sortJobs(field) {
                 return 0;
             });
 
-            sortDirection *= -1; // toggle ASC/DESC
+            sortDirection *= -1; 
 
             const table = document.getElementById("jobsTable");
             table.innerHTML = "";
@@ -168,8 +168,6 @@ function sortJobs(field) {
                 </tr>
                 `;
             });
-
             filterJobs();
-            updateStats(data);
         });
 }
